@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MICHAEL — Video editor, webdesigner & social media</title>
+  <meta name="description" content="Michael — video editor, webdesigner a správce sociálních sítí. Videa, weby a obsah, který lidi fakt zajímá.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;600;800;900&family=Space+Grotesk:wght@300;400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+</head>
+<body>
+
+  <!-- ===== PRELOADER ===== -->
+  <div class="preloader" id="preloader">
+    <div class="preloader-inner">
+      <img src="assets/logo-white.png" alt="Michael" class="preloader-logo-img">
+      <span class="preloader-count" id="preloaderCount">0%</span>
+    </div>
+  </div>
+
+  <!-- ===== CUSTOM CURSOR ===== -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ===== BACKGROUND FX ===== -->
+  <div class="bg-fx" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <!-- ===== NAV ===== -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav-logo">MICHAEL</a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#top" class="active" data-section="top" data-cs="Domů" data-en="Home">Domů</a>
+      <a href="#work" data-section="work" data-cs="Práce" data-en="Work">Práce</a>
+      <a href="#services" data-section="services" data-cs="Služby" data-en="Services">Služby</a>
+      <a href="#about" data-section="about" data-cs="O mně" data-en="About">O mně</a>
+      <a href="#contact" data-section="contact" data-cs="Kontakt" data-en="Contact">Kontakt</a>
+    </nav>
+    <div class="nav-right">
+      <div class="lang-switch" id="langSwitch" role="group" aria-label="Language">
+        <button data-lang="cs" class="active">CZ</button>
+        <button data-lang="en">EN</button>
+      </div>
+      <a href="#contact" class="nav-cta magnetic" data-cs="Spolupráce" data-en="Let's talk">Spolupráce</a>
+      <button class="nav-burger" id="navBurger" aria-label="Menu">
+        <span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MOBILE MENU ===== -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#work" data-cs="Práce" data-en="Work">Práce</a>
+    <a href="#services" data-cs="Služby" data-en="Services">Služby</a>
+    <a href="#about" data-cs="O mně" data-en="About">O mně</a>
+    <a href="#contact" data-cs="Kontakt" data-en="Contact">Kontakt</a>
+  </div>
+
+  <main id="top">
+
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+      <p class="hero-eyebrow reveal">
+        <span class="pulse-dot"></span>
+        <span data-cs="Volný pro nové projekty" data-en="Available for new projects">Volný pro nové projekty</span>
+      </p>
+      <h1 class="hero-title">
+        <span class="hero-line"><span class="hero-word">MICHAEL</span></span>
+        <span class="hero-line hero-sub-line">
+          <span class="hero-role" data-cs="VIDEO EDITOR" data-en="VIDEO EDITOR">VIDEO EDITOR</span>
+          <span class="hero-amp">|</span>
+          <span class="hero-role" data-cs="WEB DESIGNER" data-en="WEB DESIGNER">WEB DESIGNER</span>
+          <span class="hero-amp">|</span>
+          <span class="hero-role gradient-text" data-cs="SOCIAL MEDIA" data-en="SOCIAL MEDIA">SOCIAL MEDIA</span>
+        </span>
+      </h1>
+      <p class="hero-desc reveal" data-cs="Stříhám videa, která lidi nedokážou přeskočit, stavím weby, které prodávají, a tvořím obsah, díky kterému značky rostou."
+         data-en="I cut videos people can't skip, build websites that sell, and create content that makes brands grow.">
+        Stříhám videa, která lidi nedokážou přeskočit, stavím weby, které prodávají, a tvořím obsah, díky kterému značky rostou.
+      </p>
+      <div class="hero-cta reveal">
+        <a href="#work" class="btn btn-primary magnetic" data-cs="Ukázky práce" data-en="See my work">Ukázky práce</a>
+        <a href="#contact" class="btn btn-ghost magnetic" data-cs="Napiš mi" data-en="Get in touch">Napiš mi</a>
+      </div>
+      <div class="hero-scroll" aria-hidden="true">
+        <span data-cs="scrolluj" data-en="scroll">scrolluj</span>
+        <div class="scroll-line"></div>
+      </div>
+    </section>
+
+    <!-- ===== MARQUEE ===== -->
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <span>STŘIH VIDEA</span><i>✦</i><span>MOTION GRAPHICS</span><i>✦</i><span>WEBDESIGN</span><i>✦</i><span>SOCIAL MEDIA</span><i>✦</i><span>SHORT-FORM</span><i>✦</i><span>COLOR GRADING</span><i>✦</i>
+        <span>STŘIH VIDEA</span><i>✦</i><span>MOTION GRAPHICS</span><i>✦</i><span>WEBDESIGN</span><i>✦</i><span>SOCIAL MEDIA</span><i>✦</i><span>SHORT-FORM</span><i>✦</i><span>COLOR GRADING</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- ===== WORK ===== -->
+    <section class="section" id="work">
+      <div class="section-head reveal">
+        <span class="section-num">01</span>
+        <h2 data-cs="Vybraná práce" data-en="Selected work">Vybraná práce</h2>
+        <p data-cs="Projekty, na které jsem nejvíc hrdý. Klikni a mrkni." data-en="Projects I'm most proud of. Click and watch.">Projekty, na které jsem nejvíc hrdý. Klikni a mrkni.</p>
+      </div>
+      <div class="work-group">
+        <h3 class="work-group-label reveal" data-cs="Longform" data-en="Longform">Longform</h3>
+        <div class="work-grid">
+          <article class="work-card reveal tilt">
+            <div class="work-thumb">
+              <div class="thumb-gradient tg-1"></div>
+              <span class="play-badge">▶</span>
+              <span class="work-views">2.4M views</span>
+            </div>
+            <div class="work-info">
+              <h3 data-cs="Ukázkový projekt — YouTube dokument" data-en="Sample project — YouTube documentary">Ukázkový projekt — YouTube dokument</h3>
+              <div class="work-tags"><span>Střih</span><span>Color</span><span>Sound</span></div>
+            </div>
+          </article>
+          <article class="work-card reveal tilt">
+            <div class="work-thumb">
+              <div class="thumb-gradient tg-2"></div>
+              <span class="play-badge">▶</span>
+              <span class="work-views">890K views</span>
+            </div>
+            <div class="work-info">
+              <h3 data-cs="Ukázkový projekt — YouTube video" data-en="Sample project — YouTube video">Ukázkový projekt — YouTube video</h3>
+              <div class="work-tags"><span>Střih</span><span>Motion</span></div>
+            </div>
+          </article>
+          <article class="work-card reveal tilt">
+            <div class="work-thumb">
+              <div class="thumb-gradient tg-3"></div>
+              <span class="play-badge">▶</span>
+              <span class="work-views">1.2M views</span>
+            </div>
+            <div class="work-info">
+              <h3 data-cs="Ukázkový projekt — reklamní spot" data-en="Sample project — commercial spot">Ukázkový projekt — reklamní spot</h3>
+              <div class="work-tags"><span>Motion</span><span>VFX</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="work-group">
+        <h3 class="work-group-label reveal" data-cs="Reels & short-form" data-en="Reels & short-form">Reels & short-form</h3>
+        <div class="work-grid reels-grid">
+          <article class="work-card reveal tilt">
+            <div class="work-thumb">
+              <div class="thumb-gradient tg-4"></div>
+              <span class="play-badge">▶</span>
+              <span class="work-views">5.1M views</span>
+            </div>
+            <div class="work-info">
+              <h3 data-cs="Reel — TikTok série" data-en="Reel — TikTok series">Reel — TikTok série</h3>
+              <div class="work-tags"><span>Hooks</span></div>
+            </div>
+          </article>
+          <article class="work-card reveal tilt">
+            <div class="work-thumb">
+              <div class="thumb-gradient tg-5"></div>
+              <span class="play-badge">▶</span>
+              <span class="work-views">3.3M views</span>
+            </div>
+            <div class="work-info">
+              <h3 data-cs="Reel — Instagram kampaň" data-en="Reel — Instagram campaign">Reel — Instagram kampaň</h3>
+              <div class="work-tags"><span>Retence</span></div>
+            </div>
+          </article>
+          <article class="work-card reveal tilt">
+            <div class="work-thumb">
+              <div class="thumb-gradient tg-6"></div>
+              <span class="play-badge">▶</span>
+              <span class="work-views">640K views</span>
+            </div>
+            <div class="work-info">
+              <h3 data-cs="Reel — gaming montage" data-en="Reel — gaming montage">Reel — gaming montage</h3>
+              <div class="work-tags"><span>VFX</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="work-group">
+        <h3 class="work-group-label reveal" data-cs="Web & e-shop" data-en="Web & e-shop">Web & e-shop</h3>
+        <a class="work-card work-card-wide reveal tilt" href="https://majkyurbex.com/cs-cz/collections" target="_blank" rel="noopener">
+          <div class="work-thumb">
+            <img class="thumb-img" src="assets/urbex-eshop.png" alt="MAJKY URBEX e-shop" loading="lazy">
+            <span class="play-badge">↗</span>
+            <span class="work-views">LIVE — majkyurbex.com</span>
+          </div>
+          <div class="work-info">
+            <h3 data-cs="MAJKY URBEX — návrh a stavba e-shopu" data-en="MAJKY URBEX — e-shop design & build">MAJKY URBEX — návrh a stavba e-shopu</h3>
+            <div class="work-tags"><span>Webdesign</span><span>E-shop</span><span>Branding</span></div>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== STATS ===== -->
+    <section class="stats reveal">
+      <div class="stat">
+        <span class="stat-num" data-count="120">0</span><span class="stat-plus">+</span>
+        <span class="stat-label" data-cs="dokončených projektů" data-en="projects delivered">dokončených projektů</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="50">0</span><span class="stat-plus">M+</span>
+        <span class="stat-label" data-cs="zhlédnutí celkem" data-en="total views">zhlédnutí celkem</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="5">0</span><span class="stat-plus"></span>
+        <span class="stat-label" data-cs="let zkušeností" data-en="years of experience">let zkušeností</span>
+      </div>
+      <div class="stat">
+        <span class="stat-num" data-count="30">0</span><span class="stat-plus">+</span>
+        <span class="stat-label" data-cs="spokojených klientů" data-en="happy clients">spokojených klientů</span>
+      </div>
+    </section>
+
+    <!-- ===== SERVICES ===== -->
+    <section class="section" id="services">
+      <div class="section-head reveal">
+        <span class="section-num">02</span>
+        <h2 data-cs="Co pro tebe udělám" data-en="What I do">Co pro tebe udělám</h2>
+        <p data-cs="Video, web i sociální sítě. Všechno pod jednou střechou." data-en="Video, web and social media. All under one roof.">Video, web i sociální sítě. Všechno pod jednou střechou.</p>
+      </div>
+      <div class="services-list">
+        <div class="service reveal">
+          <button class="service-head" type="button" aria-expanded="false">
+            <span class="service-num">01</span>
+            <h3 data-cs="Střih videa & motion" data-en="Video editing & motion">Střih videa & motion</h3>
+            <span class="service-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="service-body">
+            <p data-cs="YouTube videa, dokumenty, reklamy. Tempo, motion graphics a barvy, které udrží pozornost do poslední vteřiny."
+               data-en="YouTube videos, documentaries, ads. Pacing, motion graphics and color that hold attention to the last second.">YouTube videa, dokumenty, reklamy. Tempo, motion graphics a barvy, které udrží pozornost do poslední vteřiny.</p>
+          </div>
+        </div>
+        <div class="service reveal">
+          <button class="service-head" type="button" aria-expanded="false">
+            <span class="service-num">02</span>
+            <h3 data-cs="Webdesign" data-en="Web design">Webdesign</h3>
+            <span class="service-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="service-body">
+            <p data-cs="Moderní weby, portfolia a e-shopy, které vypadají skvěle a hlavně prodávají. Od návrhu po spuštění."
+               data-en="Modern websites, portfolios and e-shops that look great and actually sell. From design to launch.">Moderní weby, portfolia a e-shopy, které vypadají skvěle a hlavně prodávají. Od návrhu po spuštění.</p>
+          </div>
+        </div>
+        <div class="service reveal">
+          <button class="service-head" type="button" aria-expanded="false">
+            <span class="service-num">03</span>
+            <h3 data-cs="Správa sociálních sítí" data-en="Social media management">Správa sociálních sítí</h3>
+            <span class="service-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="service-body">
+            <p data-cs="Strategie, obsah a plánování pro Instagram, TikTok i YouTube. Růst, který jde vidět v číslech."
+               data-en="Strategy, content and scheduling for Instagram, TikTok and YouTube. Growth you can see in the numbers.">Strategie, obsah a plánování pro Instagram, TikTok i YouTube. Růst, který jde vidět v číslech.</p>
+          </div>
+        </div>
+        <div class="service reveal">
+          <button class="service-head" type="button" aria-expanded="false">
+            <span class="service-num">04</span>
+            <h3 data-cs="Short-form content" data-en="Short-form content">Short-form content</h3>
+            <span class="service-toggle" aria-hidden="true">+</span>
+          </button>
+          <div class="service-body">
+            <p data-cs="Reels, TikToky, Shorts. Hooky, které zastaví scroll, a střih optimalizovaný na retenci."
+               data-en="Reels, TikToks, Shorts. Hooks that stop the scroll and edits optimized for retention.">Reels, TikToky, Shorts. Hooky, které zastaví scroll, a střih optimalizovaný na retenci.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section about" id="about">
+      <div class="about-visual reveal">
+        <div class="about-photo">
+          <img class="about-photo-img" src="assets/michael.jpg" alt="Michael" loading="lazy" onerror="this.remove()">
+          <span data-cs="TVOJE FOTKA" data-en="YOUR PHOTO">TVOJE FOTKA</span>
+        </div>
+        <div class="about-photo-glow"></div>
+      </div>
+      <div class="about-text">
+        <div class="section-head reveal">
+          <span class="section-num">03</span>
+          <h2 data-cs="Kdo jsem" data-en="Who I am">Kdo jsem</h2>
+        </div>
+        <p class="reveal" data-cs="Ahoj, jsem Michael. Video editor, webdesigner a správce sociálních sítí v jedné osobě. Každý frame, každý pixel a každý post má u mě důvod."
+           data-en="Hey, I'm Michael. Video editor, web designer and social media manager in one. Every frame, every pixel and every post has a reason.">
+          Ahoj, jsem Michael. Video editor, webdesigner a správce sociálních sítí v jedné osobě. Každý frame, každý pixel a každý post má u mě důvod.
+        </p>
+        <p class="reveal" data-cs="Posledních pár let pomáhám tvůrcům a značkám vyprávět příběhy — videem, webem i obsahem na sítích. Když zrovna netvořím, studuju, proč některý obsah funguje a jiný ne."
+           data-en="For the past few years I've been helping creators and brands tell stories — through video, web and social content. When I'm not creating, I'm studying why some content works and some doesn't.">
+          Posledních pár let pomáhám tvůrcům a značkám vyprávět příběhy — videem, webem i obsahem na sítích. Když zrovna netvořím, studuju, proč některý obsah funguje a jiný ne.
+        </p>
+        <div class="tools reveal">
+          <span class="tools-label" data-cs="Nástroje" data-en="Toolkit">Nástroje</span>
+          <div class="tools-row">
+            <span>Premiere Pro</span><span>After Effects</span><span>Photoshop</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section contact" id="contact">
+      <div class="section-head reveal contact-head">
+        <span class="section-num">04</span>
+        <h2 data-cs="Máš projekt?" data-en="Got a project?">Máš projekt?</h2>
+        <p data-cs="Napiš mi a do 24 hodin se ozvu. Bez závazků, bez formalit." data-en="Drop me a line and I'll get back within 24 hours. No strings attached.">Napiš mi a do 24 hodin se ozvu. Bez závazků, bez formalit.</p>
+      </div>
+      <a href="mailto:michaelworkedit@gmail.com" class="contact-mail reveal magnetic">
+        <span class="contact-mail-text">michaelworkedit@gmail.com</span>
+        <span class="contact-mail-arrow">↗</span>
+      </a>
+      <form class="contact-form reveal" action="https://formsubmit.co/michaelworkedit@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_subject" value="Nová poptávka z portfolia">
+        <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
+        <div class="form-row">
+          <input type="text" name="name" required
+                 placeholder="Tvoje jméno" data-cs-ph="Tvoje jméno" data-en-ph="Your name">
+          <input type="email" name="email" required
+                 placeholder="Tvůj e-mail" data-cs-ph="Tvůj e-mail" data-en-ph="Your e-mail">
+        </div>
+        <textarea name="message" rows="5" required
+                  placeholder="Popiš svůj projekt — co potřebuješ, termín, rozpočet…"
+                  data-cs-ph="Popiš svůj projekt — co potřebuješ, termín, rozpočet…"
+                  data-en-ph="Describe your project — what you need, deadline, budget…"></textarea>
+        <button type="submit" class="btn btn-primary magnetic" data-cs="Odeslat poptávku" data-en="Send inquiry">Odeslat poptávku</button>
+      </form>
+      <div class="socials reveal">
+        <a href="#" class="magnetic">Instagram</a>
+        <a href="#" class="magnetic">YouTube</a>
+        <a href="#" class="magnetic">TikTok</a>
+        <a href="#" class="magnetic">X</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span>© 2026 Michael</span>
+    <span data-cs="Navrženo a nastříháno s láskou k detailu" data-en="Designed & edited with love for detail">Navrženo a nastříháno s láskou k detailu</span>
+    <a href="#top" data-cs="Zpět nahoru ↑" data-en="Back to top ↑">Zpět nahoru ↑</a>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
