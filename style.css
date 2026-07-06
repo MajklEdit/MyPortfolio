@@ -68,26 +68,26 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -3;
+  z-index: -2;
   pointer-events: none;
-  filter: saturate(0.85) contrast(1.05);
+  filter: saturate(1.25) contrast(1.15) brightness(0.92);
 }
 
 .background-overlay {
   position: fixed;
   inset: 0;
-  z-index: -2;
+  z-index: -1;
   pointer-events: none;
   background:
-    radial-gradient(circle at center, rgba(18,18,18,0.18), rgba(18,18,18,0.82) 72%),
-    linear-gradient(180deg, rgba(18,18,18,0.45), rgba(18,18,18,0.72));
+    radial-gradient(circle at center, rgba(18,18,18,0.08), rgba(18,18,18,0.48) 78%),
+    linear-gradient(180deg, rgba(18,18,18,0.14), rgba(18,18,18,0.38));
 }
 
 @media (max-width: 768px) {
   .background-overlay {
     background:
-      radial-gradient(circle at center, rgba(18,18,18,0.28), rgba(18,18,18,0.9) 72%),
-      linear-gradient(180deg, rgba(18,18,18,0.58), rgba(18,18,18,0.82));
+      radial-gradient(circle at center, rgba(18,18,18,0.16), rgba(18,18,18,0.62) 78%),
+      linear-gradient(180deg, rgba(18,18,18,0.24), rgba(18,18,18,0.48));
   }
 }
 
@@ -142,36 +142,8 @@ a { color: inherit; text-decoration: none; }
   .cursor-dot, .cursor-ring { display: none; }
 }
 
-/* ===== BACKGROUND FX — moving gradients, blurred at the sides ===== */
-.bg-fx { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
-.blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(130px);
-  opacity: 0.5;
-  will-change: transform;
-}
-.blob-1 {
-  width: 46vw; height: 46vw;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.14), transparent 65%);
-  top: -12%; left: -20%;
-  animation: drift1 20s ease-in-out infinite alternate;
-}
-.blob-2 {
-  width: 44vw; height: 44vw;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.2), transparent 65%);
-  bottom: -12%; right: -20%;
-  animation: drift2 24s ease-in-out infinite alternate;
-}
-.blob-3 {
-  width: 36vw; height: 36vw;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.09), transparent 65%);
-  top: 45%; right: -18%;
-  animation: drift3 28s ease-in-out infinite alternate;
-}
-@keyframes drift1 { to { transform: translate(6vw, 42vh) scale(1.15); } }
-@keyframes drift2 { to { transform: translate(-5vw, -38vh) scale(0.92); } }
-@keyframes drift3 { to { transform: translate(-4vw, -30vh) scale(1.18); } }
+/* ===== BACKGROUND FX removed — video is the main background ===== */
+.bg-fx { display: none; }
 
 /* ===== NAV — floating rounded bar, pill items ===== */
 .nav {
