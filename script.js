@@ -207,19 +207,25 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   const closeButtons = document.querySelectorAll('[data-close-contact]');
   if (!trigger || !form) return;
 
+  let lockedScrollY = 0;
+
   const closeForm = () => {
     form.classList.remove('open');
     form.setAttribute('aria-hidden', 'true');
     trigger.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('form-open');
     document.body.classList.remove('form-open');
+    window.scrollTo(0, lockedScrollY);
     trigger.focus();
   };
 
   trigger.setAttribute('aria-expanded', 'false');
   trigger.addEventListener('click', () => {
+    lockedScrollY = window.scrollY;
     form.classList.add('open');
     form.setAttribute('aria-hidden', 'false');
     trigger.setAttribute('aria-expanded', 'true');
+    document.documentElement.classList.add('form-open');
     document.body.classList.add('form-open');
     window.setTimeout(() => form.querySelector('input[name="name"]')?.focus(), 220);
   });

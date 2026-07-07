@@ -937,8 +937,11 @@ a { color: inherit; text-decoration: none; }
   margin: 2rem auto 2.4rem;
 }
 
+html.form-open,
 body.form-open {
   overflow: hidden;
+  height: 100%;
+  touch-action: none;
 }
 
 .contact-form {
@@ -959,7 +962,7 @@ body.form-open {
   text-align: left;
   opacity: 0;
   visibility: hidden;
-  overflow-y: auto;
+  overflow: hidden;
   pointer-events: none;
   transform: scale(0.98);
   transition: opacity 0.35s, visibility 0.35s, transform 0.45s var(--ease);
