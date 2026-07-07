@@ -59,9 +59,20 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
   buttons.forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
 
+  const detectInitialLang = () => {
+    const browserLangs = navigator.languages?.length ? navigator.languages : [navigator.language];
+    const hasCzSkLang = browserLangs
+      .filter(Boolean)
+      .some((lang) => /^(cs|sk)(-|$)/i.test(lang));
+    let timeZone = '';
+    try { timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) { /* unsupported */ }
+    const isCzSkZone = timeZone === 'Europe/Prague' || timeZone === 'Europe/Bratislava';
+    return hasCzSkLang || isCzSkZone ? 'cs' : 'en';
+  };
+
   let saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) { /* private mode */ }
-  setLang(saved === 'en' ? 'en' : 'cs');
+  setLang(saved === 'cs' || saved === 'en' ? saved : detectInitialLang());
 })();
 
 /* ===== CUSTOM CURSOR ===== */
