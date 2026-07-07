@@ -57,7 +57,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
   let saved = null;
   try { saved = localStorage.getItem('lang'); } catch (e) { /* private mode */ }
-  if (saved === 'en') setLang('en');
+  setLang(saved === 'en' ? 'en' : 'cs');
 })();
 
 /* ===== CUSTOM CURSOR ===== */
