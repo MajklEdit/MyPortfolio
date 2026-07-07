@@ -36,6 +36,10 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
   const setLang = (lang) => {
     document.documentElement.lang = lang;
+    document.querySelectorAll('[data-cs-html]').forEach((el) => {
+      const html = el.dataset[lang + 'Html'];
+      if (html) el.innerHTML = html;
+    });
     document.querySelectorAll('[data-cs]').forEach((el) => {
       const text = el.dataset[lang];
       if (text) el.textContent = text;
