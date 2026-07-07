@@ -423,9 +423,11 @@ a { color: inherit; text-decoration: none; }
 /* ===== MARQUEE ===== */
 .marquee {
   overflow: hidden;
+  position: relative;
+  left: 50%;
   width: 100vw;
-  margin-left: calc(50% - 50vw);
-  margin-right: calc(50% - 50vw);
+  margin-left: -50vw;
+  margin-right: -50vw;
   border-top: 1px solid var(--border);
   border-bottom: 1px solid var(--border);
   padding: 1.1rem 0;
@@ -959,7 +961,17 @@ a { color: inherit; text-decoration: none; }
   .about-photo { width: 100%; }
 }
 @media (max-width: 768px) {
-  .hero { padding-top: 7.5rem; padding-bottom: 4rem; }
+  .hero {
+    min-height: 100svh;
+    justify-content: center;
+    align-items: center;
+    padding: 7.5rem clamp(1rem, 5vw, 1.4rem) 4.5rem;
+  }
+  .hero-title {
+    align-items: stretch;
+    margin-left: auto;
+    margin-right: auto;
+  }
   .hero-scroll { display: none; }
   .hero-sub-line {
     flex-direction: row;
@@ -969,7 +981,11 @@ a { color: inherit; text-decoration: none; }
     max-width: 100%;
   }
   .hero-amp { font-size: 0.9em; }
-  .hero-desc { margin-top: 1.6rem; }
+  .hero-desc {
+    margin: 1.6rem auto 0;
+    max-width: 34rem;
+    text-align: center;
+  }
   .hero-cta {
     margin-top: 2rem;
     gap: 0.7rem;
@@ -981,6 +997,15 @@ a { color: inherit; text-decoration: none; }
     padding: 0.82rem clamp(0.75rem, 3vw, 1.2rem);
     font-size: clamp(0.78rem, 3.6vw, 0.95rem);
     white-space: nowrap;
+  }
+  .marquee {
+    left: 50%;
+    width: 100vw;
+    margin-left: -50vw;
+    margin-right: -50vw;
+  }
+  .marquee-track {
+    animation-duration: 62s;
   }
 }
 @media (max-width: 1360px) {
