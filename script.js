@@ -134,13 +134,22 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
   const baseItems = Array.from(track.children).map((item) => item.cloneNode(true));
   const fillTrack = () => {
-    track.replaceChildren(...baseItems.map((item) => item.cloneNode(true)));
-    const targetWidth = window.innerWidth * 2.4;
+    const sequence = baseItems.map((item) => item.cloneNode(true));
+    track.replaceChildren(...sequence.map((item) => item.cloneNode(true)));
+    const targetWidth = window.innerWidth + track.scrollWidth;
     let guard = 0;
-    while (track.scrollWidth < targetWidth && guard < 12) {
-      baseItems.forEach((item) => track.appendChild(item.cloneNode(true)));
+    while (track.scrollWidth < targetWidth && guard < 16) {
+      const nextItems = baseItems.map((item) => item.cloneNode(true));
+      nextItems.forEach((item) => {
+        sequence.push(item);
+        track.appendChild(item.cloneNode(true));
+      });
       guard += 1;
     }
+    track.replaceChildren(
+      ...sequence.map((item) => item.cloneNode(true)),
+      ...sequence.map((item) => item.cloneNode(true))
+    );
   };
 
   fillTrack();

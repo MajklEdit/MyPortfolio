@@ -352,19 +352,27 @@ a { color: inherit; text-decoration: none; }
 }
 .hero-sub-line {
   font-family: 'Syne', sans-serif;
-  font-size: clamp(0.9rem, 2.5vw, 1.75rem);
+  font-size: clamp(0.95rem, 2.7vw, 1.85rem);
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.065em;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: clamp(0.35rem, 1.2vw, 1rem);
+  gap: clamp(0.22rem, 0.8vw, 0.72rem);
   flex-wrap: nowrap;
   width: 100%;
   overflow: visible;
   animation: fadeIn 1.2s ease 0.55s both;
 }
-.hero-role,
+.hero-role {
+  white-space: nowrap;
+  background: linear-gradient(120deg, var(--ink) 0%, var(--gray) 50%, var(--ink) 100%);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradientShift 6s ease infinite;
+}
 .hero-amp {
   white-space: nowrap;
 }
@@ -953,9 +961,9 @@ a { color: inherit; text-decoration: none; }
   .hero-scroll { display: none; }
   .hero-sub-line {
     flex-direction: row;
-    gap: clamp(0.18rem, 1vw, 0.4rem);
-    font-size: clamp(0.48rem, 2.25vw, 0.82rem);
-    letter-spacing: clamp(0.01em, 0.35vw, 0.055em);
+    gap: clamp(0.08rem, 0.55vw, 0.24rem);
+    font-size: clamp(0.54rem, 2.55vw, 0.9rem);
+    letter-spacing: clamp(0, 0.2vw, 0.035em);
     max-width: 100%;
   }
   .hero-amp { font-size: 0.9em; }
