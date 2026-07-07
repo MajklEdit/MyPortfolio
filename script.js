@@ -205,6 +205,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   const trigger = document.getElementById('contactOpen');
   const form = document.getElementById('contactForm');
   const closeButtons = document.querySelectorAll('[data-close-contact]');
+  const status = document.getElementById('formStatus');
+  const statusClose = document.getElementById('formStatusClose');
   if (!trigger || !form) return;
 
   let lockedScrollY = 0;
@@ -213,6 +215,27 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
     form.classList.remove('open');
     form.setAttribute('aria-hidden', 'true');
     trigger.setAttribute('aria-expanded', 'false');
+    document.documentElement.classList.remove('form-open');
+    document.body.classList.remove('form-open');
+    window.scrollTo(0, lockedScrollY);
+    trigger.focus();
+  };
+  const openStatus = (type = 'success') => {
+    const lang = document.documentElement.lang === 'en' ? 'en' : 'cs';
+    status?.querySelectorAll(`[data-${lang}-${type}]`).forEach((el) => {
+      const text = el.dataset[lang + type[0].toUpperCase() + type.slice(1)];
+      if (text) el.textContent = text;
+    });
+    status?.classList.toggle('error', type === 'error');
+    status?.classList.add('open');
+    status?.setAttribute('aria-hidden', 'false');
+    document.documentElement.classList.add('form-open');
+    document.body.classList.add('form-open');
+    statusClose?.focus();
+  };
+  const closeStatus = () => {
+    status?.classList.remove('open', 'error');
+    status?.setAttribute('aria-hidden', 'true');
     document.documentElement.classList.remove('form-open');
     document.body.classList.remove('form-open');
     window.scrollTo(0, lockedScrollY);
@@ -230,8 +253,38 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
     window.setTimeout(() => form.querySelector('input[name="name"]')?.focus(), 220);
   });
   closeButtons.forEach((button) => button.addEventListener('click', closeForm));
+  statusClose?.addEventListener('click', closeStatus);
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const submit = form.querySelector('button[type="submit"]');
+    const originalText = submit?.textContent;
+    if (submit) {
+      submit.disabled = true;
+      submit.textContent = document.documentElement.lang === 'en' ? 'Sending...' : 'Odesílám...';
+    }
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' }
+      });
+      if (!response.ok) throw new Error('Form submit failed');
+      form.reset();
+      closeForm();
+      openStatus('success');
+    } catch (error) {
+      openStatus('error');
+    } finally {
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = originalText;
+      }
+    }
+  });
   document.addEventListener('keydown', (event) => {
-    if (event.key === 'Escape' && form.classList.contains('open')) closeForm();
+    if (event.key !== 'Escape') return;
+    if (form.classList.contains('open')) closeForm();
+    if (status?.classList.contains('open')) closeStatus();
   });
 })();
 

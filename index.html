@@ -86,8 +86,8 @@
         Stříhám videa, která lidi nedokážou přeskočit,<br>stavím weby, které prodávají, a tvořím obsah, díky kterému značky rostou.
       </p>
       <div class="hero-cta reveal">
-        <a href="#work" class="btn btn-primary magnetic" data-cs="Ukázky práce" data-en="See my work">Ukázky práce</a>
-        <a href="#contact" class="btn btn-ghost magnetic" data-cs="Napiš mi" data-en="Get in touch">Napiš mi</a>
+        <a href="#contact" class="btn btn-primary magnetic" data-cs="Napiš mi" data-en="Get in touch">Napiš mi</a>
+        <a href="#work" class="btn btn-ghost magnetic" data-cs="Ukázky práce" data-en="See my work">Ukázky práce</a>
       </div>
       <div class="hero-scroll" aria-hidden="true">
         <span data-cs="scrolluj" data-en="scroll">scrolluj</span>
@@ -311,6 +311,7 @@
       <form class="contact-form reveal" id="contactForm" action="https://formsubmit.co/michaelworkedit@gmail.com" method="POST" aria-hidden="true">
         <button class="form-close" type="button" id="contactClose" data-close-contact aria-label="Zavřít formulář" data-cs-label="Zavřít formulář" data-en-label="Close form">×</button>
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <input type="hidden" name="_subject" value="Nová poptávka z portfolia">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
         <div class="form-row">
@@ -335,6 +336,14 @@
           <button type="button" class="btn btn-ghost magnetic" data-close-contact data-cs="Zavřít" data-en="Close">Zavřít</button>
         </div>
       </form>
+      <div class="form-status" id="formStatus" aria-live="polite" aria-hidden="true">
+        <div class="form-status-box">
+          <span class="form-status-icon" aria-hidden="true">↗</span>
+          <h3 data-cs="Poptávka odeslána" data-en="Inquiry sent" data-cs-success="Poptávka odeslána" data-en-success="Inquiry sent" data-cs-error="Odeslání se nepovedlo" data-en-error="Sending failed">Poptávka odeslána</h3>
+          <p data-cs="Díky za zprávu. Brzy se ti ozvu a domluvíme další kroky." data-en="Thanks for reaching out. I’ll get back to you soon and we’ll plan the next steps." data-cs-success="Díky za zprávu. Brzy se ti ozvu a domluvíme další kroky." data-en-success="Thanks for reaching out. I’ll get back to you soon and we’ll plan the next steps." data-cs-error="Zkus to prosím znovu, nebo mi napiš přímo na e-mail." data-en-error="Please try again or contact me directly by e-mail.">Díky za zprávu. Brzy se ti ozvu a domluvíme další kroky.</p>
+          <button type="button" class="btn btn-primary" id="formStatusClose" data-cs="Zavřít" data-en="Close">Zavřít</button>
+        </div>
+      </div>
       <div class="socials reveal">
         <a href="#" class="magnetic">Instagram</a>
         <a href="#" class="magnetic">YouTube</a>
