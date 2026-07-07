@@ -487,7 +487,20 @@ a { color: inherit; text-decoration: none; }
 .reels-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .reels-grid .work-thumb { aspect-ratio: 9 / 16; }
 @media (max-width: 640px) {
-  .reels-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .reels-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    margin: 0 calc(-1 * clamp(1.2rem, 4vw, 3rem));
+    padding: 0 clamp(1.2rem, 4vw, 3rem);
+  }
+  .reels-grid::-webkit-scrollbar { display: none; }
+  .reels-grid .work-card {
+    flex: 0 0 64%;
+    scroll-snap-align: center;
+  }
 }
 .work-card {
   border-radius: 20px;
@@ -588,6 +601,7 @@ a { color: inherit; text-decoration: none; }
   border: 1px solid var(--border);
   padding: 0.25rem 0.65rem;
   border-radius: 999px;
+  white-space: nowrap;
 }
 
 /* ===== STATS ===== */
