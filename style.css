@@ -1074,6 +1074,10 @@ body.form-open {
 .contact-form .btn { align-self: center; }
 @media (max-width: 560px) {
   .form-row { grid-template-columns: 1fr; }
+  .contact-form {
+    justify-content: flex-start;
+    padding-top: calc(5.5rem + env(safe-area-inset-top));
+  }
   .form-actions .btn {
     flex: 1 1 100%;
   }
