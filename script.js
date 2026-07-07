@@ -151,7 +151,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 /* ===== VIEW COUNTERS — count up on scroll into view ===== */
 (() => {
-  const views = document.querySelectorAll('.work-views[data-count]');
+  const views = document.querySelectorAll('.views-num[data-count]');
   const format = (value, isDecimal) => (isDecimal ? value.toFixed(1) : String(Math.round(value)));
   const animate = (el) => {
     const target = parseFloat(el.dataset.count);
