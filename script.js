@@ -399,3 +399,41 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   tryPlay();
   document.addEventListener('click', tryPlay, { once: true });
 })();
+
+/* ===== SMOOTH WHEEL SCROLL ===== */
+(() => {
+  if (prefersReducedMotion || !matchMedia('(hover: hover)').matches) return;
+
+  let targetY = window.scrollY;
+  let currentY = window.scrollY;
+  let rafId = null;
+
+  const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
+  const clamp = (value) => Math.max(0, Math.min(value, maxScroll()));
+
+  const step = () => {
+    currentY += (targetY - currentY) * 0.16;
+    if (Math.abs(targetY - currentY) < 0.5) {
+      currentY = targetY;
+      rafId = null;
+    } else {
+      rafId = requestAnimationFrame(step);
+    }
+    window.scrollTo(0, currentY);
+  };
+
+  window.addEventListener('wheel', (event) => {
+    if (event.ctrlKey) return;
+    event.preventDefault();
+    targetY = clamp(targetY + event.deltaY * 0.9);
+    if (!rafId) {
+      currentY = window.scrollY;
+      rafId = requestAnimationFrame(step);
+    }
+  }, { passive: false });
+
+  window.addEventListener('keydown', () => {
+    targetY = window.scrollY;
+    currentY = window.scrollY;
+  });
+})();

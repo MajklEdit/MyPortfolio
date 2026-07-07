@@ -472,7 +472,7 @@ a { color: inherit; text-decoration: none; }
   gap: 2.5rem;
   min-width: max-content;
   width: max-content;
-  animation: marquee 42s linear infinite;
+  animation: marquee 68s linear infinite;
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
@@ -1078,7 +1078,7 @@ a { color: inherit; text-decoration: none; }
     margin-inline: 0;
   }
   .marquee-track {
-    animation-duration: 62s;
+    animation-duration: 90s;
   }
 }
 @media (max-width: 1360px) {
