@@ -1067,8 +1067,13 @@ body.form-open {
 .contact-form > textarea,
 .contact-form > .service-choices {
   width: min(100%, 680px);
+  max-width: 680px;
   margin-left: auto;
   margin-right: auto;
+}
+.contact-form > textarea {
+  align-self: center;
+  width: min(100%, 680px) !important;
 }
 .form-actions {
   display: flex;
