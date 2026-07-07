@@ -149,6 +149,20 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   });
 })();
 
+/* ===== REEL PREVIEWS — play on hover ===== */
+(() => {
+  document.querySelectorAll('.thumb-video').forEach((video) => {
+    const card = video.closest('.work-card');
+    card.addEventListener('mouseenter', () => {
+      video.play().catch(() => {});
+    });
+    card.addEventListener('mouseleave', () => {
+      video.pause();
+      video.currentTime = 0;
+    });
+  });
+})();
+
 /* ===== SCROLL REVEAL ===== */
 (() => {
   const revealEls = document.querySelectorAll('.reveal');

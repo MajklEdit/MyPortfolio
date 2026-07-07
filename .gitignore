@@ -1,2 +1,3 @@
 assets/*.mp4
 !assets/bg-video.mp4
+!assets/*-web.mp4
