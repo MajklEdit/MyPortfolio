@@ -447,8 +447,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
   const step = () => {
     isAnimating = true;
-    currentY += (targetY - currentY) * 0.32;
-    if (Math.abs(targetY - currentY) < 0.35) {
+    currentY += (targetY - currentY) * 0.1;
+    if (Math.abs(targetY - currentY) < 0.3) {
       currentY = targetY;
       rafId = null;
       isAnimating = false;
@@ -460,8 +460,9 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
   window.addEventListener('wheel', (event) => {
     if (event.ctrlKey) return;
+    if (document.body.classList.contains('form-open')) return;
     event.preventDefault();
-    targetY = clamp(targetY + event.deltaY * 0.75);
+    targetY = clamp(targetY + event.deltaY);
     if (!rafId) {
       currentY = window.scrollY;
       rafId = requestAnimationFrame(step);

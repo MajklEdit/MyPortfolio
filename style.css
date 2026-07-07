@@ -1064,6 +1064,12 @@ body.form-open {
   opacity: 0;
   pointer-events: none;
 }
+.contact-form > textarea,
+.contact-form > .service-choices {
+  width: min(100%, 680px);
+  margin-left: auto;
+  margin-right: auto;
+}
 .form-actions {
   display: flex;
   justify-content: center;
