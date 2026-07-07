@@ -278,7 +278,17 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
     });
     card.addEventListener('click', (event) => {
       if (event.target === soundToggle) return;
+      if (card.classList.contains('video-active')) return;
       playWithSound();
+    });
+    video.addEventListener('click', (event) => {
+      if (!card.classList.contains('video-active')) return;
+      event.stopPropagation();
+      if (video.paused) {
+        video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
     });
     soundToggle.addEventListener('click', (event) => {
       event.stopPropagation();

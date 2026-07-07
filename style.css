@@ -588,6 +588,7 @@ a { color: inherit; text-decoration: none; }
   opacity: 0;
   transition: opacity 0.35s, transform 0.45s var(--ease);
   padding-left: 4px;
+  pointer-events: none;
 }
 .work-card:hover .play-badge {
   opacity: 1;
@@ -607,6 +608,7 @@ a { color: inherit; text-decoration: none; }
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
   border: 1px solid rgba(255,255,255,0.12);
+  pointer-events: none;
 }
 .sound-toggle {
   position: absolute;
