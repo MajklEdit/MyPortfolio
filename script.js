@@ -136,7 +136,8 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   const fillTrack = () => {
     const sequence = baseItems.map((item) => item.cloneNode(true));
     track.replaceChildren(...sequence.map((item) => item.cloneNode(true)));
-    const targetWidth = window.innerWidth + track.scrollWidth;
+    const viewportWidth = window.visualViewport?.width || window.innerWidth;
+    const targetWidth = viewportWidth * 4;
     let guard = 0;
     while (track.scrollWidth < targetWidth && guard < 16) {
       const nextItems = baseItems.map((item) => item.cloneNode(true));
