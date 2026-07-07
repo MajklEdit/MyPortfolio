@@ -46,6 +46,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
     });
     buttons.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
     try { localStorage.setItem('lang', lang); } catch (e) { /* private mode */ }
+    window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
   };
 
   buttons.forEach((b) => b.addEventListener('click', () => setLang(b.dataset.lang)));
@@ -206,13 +207,30 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 
 /* ===== REEL PREVIEWS — play on hover ===== */
 (() => {
+  const soundCopy = {
+    cs: { on: 'Se zvukem', off: 'Bez zvuku', onLabel: 'Vypnout zvuk', offLabel: 'Zapnout zvuk' },
+    en: { on: 'Sound on', off: 'Muted', onLabel: 'Mute sound', offLabel: 'Play with sound' }
+  };
+  const currentLang = () => (document.documentElement.lang === 'en' ? 'en' : 'cs');
+  const setSoundButton = (button, isMuted) => {
+    const copy = soundCopy[currentLang()];
+    button.textContent = isMuted ? copy.off : copy.on;
+    button.setAttribute('aria-label', isMuted ? copy.offLabel : copy.onLabel);
+  };
+
+  window.addEventListener('langchange', () => {
+    document.querySelectorAll('.thumb-video').forEach((video) => {
+      const button = video.closest('.work-card').querySelector('.sound-toggle');
+      if (button) setSoundButton(button, video.muted);
+    });
+  });
+
   document.querySelectorAll('.thumb-video').forEach((video) => {
     const card = video.closest('.work-card');
     const soundToggle = document.createElement('button');
     soundToggle.type = 'button';
     soundToggle.className = 'sound-toggle';
-    soundToggle.textContent = 'Zvuk off';
-    soundToggle.setAttribute('aria-label', 'Zapnout zvuk');
+    setSoundButton(soundToggle, true);
     video.insertAdjacentElement('afterend', soundToggle);
 
     const stopOtherVideos = () => {
@@ -225,8 +243,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
         other.muted = true;
         otherCard.classList.remove('video-active');
         if (otherToggle) {
-          otherToggle.textContent = 'Zvuk off';
-          otherToggle.setAttribute('aria-label', 'Zapnout zvuk');
+          setSoundButton(otherToggle, true);
         }
       });
     };
@@ -237,8 +254,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
       video.controls = true;
       video.muted = false;
       video.play().catch(() => {});
-      soundToggle.textContent = 'Zvuk on';
-      soundToggle.setAttribute('aria-label', 'Vypnout zvuk');
+      setSoundButton(soundToggle, false);
     };
 
     card.addEventListener('mouseenter', () => {
@@ -262,8 +278,7 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
         return;
       }
       video.muted = !video.muted;
-      soundToggle.textContent = video.muted ? 'Zvuk off' : 'Zvuk on';
-      soundToggle.setAttribute('aria-label', video.muted ? 'Zapnout zvuk' : 'Vypnout zvuk');
+      setSoundButton(soundToggle, video.muted);
     });
   });
 })();
