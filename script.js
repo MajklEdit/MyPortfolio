@@ -48,6 +48,10 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
       const ph = el.dataset[lang + 'Ph'];
       if (ph) el.placeholder = ph;
     });
+    document.querySelectorAll('[data-cs-label]').forEach((el) => {
+      const label = el.dataset[lang + 'Label'];
+      if (label) el.setAttribute('aria-label', label);
+    });
     buttons.forEach((b) => b.classList.toggle('active', b.dataset.lang === lang));
     try { localStorage.setItem('lang', lang); } catch (e) { /* private mode */ }
     window.dispatchEvent(new CustomEvent('langchange', { detail: { lang } }));
@@ -185,6 +189,35 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 })();
 
 /* ===== VIEW COUNTERS — count up on scroll into view ===== */
+/* ===== CONTACT FORM REVEAL ===== */
+(() => {
+  const trigger = document.getElementById('contactOpen');
+  const form = document.getElementById('contactForm');
+  const closeButtons = document.querySelectorAll('[data-close-contact]');
+  if (!trigger || !form) return;
+
+  const closeForm = () => {
+    form.classList.remove('open');
+    form.setAttribute('aria-hidden', 'true');
+    trigger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('form-open');
+    trigger.focus();
+  };
+
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.addEventListener('click', () => {
+    form.classList.add('open');
+    form.setAttribute('aria-hidden', 'false');
+    trigger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('form-open');
+    window.setTimeout(() => form.querySelector('input[name="name"]')?.focus(), 220);
+  });
+  closeButtons.forEach((button) => button.addEventListener('click', closeForm));
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && form.classList.contains('open')) closeForm();
+  });
+})();
+
 (() => {
   const views = document.querySelectorAll('.views-num[data-count]');
   const format = (value, isDecimal) => (isDecimal ? value.toFixed(1) : String(Math.round(value)));
@@ -407,15 +440,18 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   let targetY = window.scrollY;
   let currentY = window.scrollY;
   let rafId = null;
+  let isAnimating = false;
 
   const maxScroll = () => document.documentElement.scrollHeight - window.innerHeight;
   const clamp = (value) => Math.max(0, Math.min(value, maxScroll()));
 
   const step = () => {
-    currentY += (targetY - currentY) * 0.16;
-    if (Math.abs(targetY - currentY) < 0.5) {
+    isAnimating = true;
+    currentY += (targetY - currentY) * 0.32;
+    if (Math.abs(targetY - currentY) < 0.35) {
       currentY = targetY;
       rafId = null;
+      isAnimating = false;
     } else {
       rafId = requestAnimationFrame(step);
     }
@@ -425,12 +461,18 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   window.addEventListener('wheel', (event) => {
     if (event.ctrlKey) return;
     event.preventDefault();
-    targetY = clamp(targetY + event.deltaY * 0.9);
+    targetY = clamp(targetY + event.deltaY * 0.75);
     if (!rafId) {
       currentY = window.scrollY;
       rafId = requestAnimationFrame(step);
     }
   }, { passive: false });
+
+  window.addEventListener('scroll', () => {
+    if (isAnimating) return;
+    targetY = window.scrollY;
+    currentY = window.scrollY;
+  }, { passive: true });
 
   window.addEventListener('keydown', () => {
     targetY = window.scrollY;

@@ -307,11 +307,9 @@
         <h2 class="cta-title" data-cs-html="Na co ještě&lt;br&gt;&lt;span class=&quot;accent-red&quot;&gt;čekáš?&lt;/span&gt;" data-en-html="What are you&lt;br&gt;&lt;span class=&quot;accent-red&quot;&gt;waiting for?&lt;/span&gt;">Na co ještě<br><span class="accent-red">čekáš?</span></h2>
         <p data-cs="Viděl jsi moji práci. Víš, co je možné. Jediná otázka je: jsi připravený udělat další krok? 👇" data-en="You've seen the work. You know what's possible. The only question is: are you ready to take action? 👇">Viděl jsi moji práci. Víš, co je možné. Jediná otázka je: jsi připravený udělat další krok? 👇</p>
       </div>
-      <a href="mailto:michaelworkedit@gmail.com" class="contact-mail reveal magnetic">
-        <span class="contact-mail-text">michaelworkedit@gmail.com</span>
-        <span class="contact-mail-arrow">↗</span>
-      </a>
-      <form class="contact-form reveal" action="https://formsubmit.co/michaelworkedit@gmail.com" method="POST">
+      <button class="btn btn-primary contact-open reveal magnetic" type="button" id="contactOpen" data-cs="KONTAKTOVAT" data-en="CONTACT">KONTAKTOVAT</button>
+      <form class="contact-form reveal" id="contactForm" action="https://formsubmit.co/michaelworkedit@gmail.com" method="POST" aria-hidden="true">
+        <button class="form-close" type="button" id="contactClose" data-close-contact aria-label="Zavřít formulář" data-cs-label="Zavřít formulář" data-en-label="Close form">×</button>
         <input type="hidden" name="_captcha" value="false">
         <input type="hidden" name="_subject" value="Nová poptávka z portfolia">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off">
@@ -321,11 +319,21 @@
           <input type="email" name="email" required
                  placeholder="Tvůj e-mail" data-cs-ph="Tvůj e-mail" data-en-ph="Your e-mail">
         </div>
+        <fieldset class="service-choices">
+          <legend data-cs="Vyber službu" data-en="Choose service">Vyber službu</legend>
+          <label><input type="checkbox" name="services[]" value="Video editing"><span data-cs="Střih videa" data-en="Video editing">Střih videa</span></label>
+          <label><input type="checkbox" name="services[]" value="Web design"><span data-cs="Webdesign" data-en="Web design">Webdesign</span></label>
+          <label><input type="checkbox" name="services[]" value="Social media"><span data-cs="Sociální sítě" data-en="Social media">Sociální sítě</span></label>
+          <label><input type="checkbox" name="services[]" value="Short-form content"><span data-cs="Short-form obsah" data-en="Short-form content">Short-form obsah</span></label>
+        </fieldset>
         <textarea name="message" rows="5" required
                   placeholder="Popiš svůj projekt — co potřebuješ, termín, rozpočet…"
                   data-cs-ph="Popiš svůj projekt — co potřebuješ, termín, rozpočet…"
                   data-en-ph="Describe your project — what you need, deadline, budget…"></textarea>
-        <button type="submit" class="btn btn-primary magnetic" data-cs="Odeslat poptávku" data-en="Send inquiry">Odeslat poptávku</button>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary magnetic" data-cs="Odeslat poptávku" data-en="Send inquiry">Odeslat poptávku</button>
+          <button type="button" class="btn btn-ghost magnetic" data-close-contact data-cs="Zavřít" data-en="Close">Zavřít</button>
+        </div>
       </form>
       <div class="socials reveal">
         <a href="#" class="magnetic">Instagram</a>
