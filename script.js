@@ -126,6 +126,26 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
   menu.querySelectorAll('a').forEach((a) => a.addEventListener('click', toggle));
 })();
 
+/* ===== MARQUEE LOOP ===== */
+(() => {
+  const track = document.querySelector('.marquee-track');
+  if (!track) return;
+
+  const baseItems = Array.from(track.children).map((item) => item.cloneNode(true));
+  const fillTrack = () => {
+    track.replaceChildren(...baseItems.map((item) => item.cloneNode(true)));
+    const targetWidth = window.innerWidth * 2.4;
+    let guard = 0;
+    while (track.scrollWidth < targetWidth && guard < 12) {
+      baseItems.forEach((item) => track.appendChild(item.cloneNode(true)));
+      guard += 1;
+    }
+  };
+
+  fillTrack();
+  window.addEventListener('resize', fillTrack, { passive: true });
+})();
+
 /* ===== SERVICES ACCORDION ===== */
 (() => {
   const services = document.querySelectorAll('.service');
@@ -188,12 +208,62 @@ const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)
 (() => {
   document.querySelectorAll('.thumb-video').forEach((video) => {
     const card = video.closest('.work-card');
+    const soundToggle = document.createElement('button');
+    soundToggle.type = 'button';
+    soundToggle.className = 'sound-toggle';
+    soundToggle.textContent = 'Zvuk off';
+    soundToggle.setAttribute('aria-label', 'Zapnout zvuk');
+    video.insertAdjacentElement('afterend', soundToggle);
+
+    const stopOtherVideos = () => {
+      document.querySelectorAll('.thumb-video').forEach((other) => {
+        if (other === video) return;
+        const otherCard = other.closest('.work-card');
+        const otherToggle = otherCard.querySelector('.sound-toggle');
+        other.pause();
+        other.controls = false;
+        other.muted = true;
+        otherCard.classList.remove('video-active');
+        if (otherToggle) {
+          otherToggle.textContent = 'Zvuk off';
+          otherToggle.setAttribute('aria-label', 'Zapnout zvuk');
+        }
+      });
+    };
+
+    const playWithSound = () => {
+      stopOtherVideos();
+      card.classList.add('video-active');
+      video.controls = true;
+      video.muted = false;
+      video.play().catch(() => {});
+      soundToggle.textContent = 'Zvuk on';
+      soundToggle.setAttribute('aria-label', 'Vypnout zvuk');
+    };
+
     card.addEventListener('mouseenter', () => {
+      if (card.classList.contains('video-active')) return;
+      video.muted = true;
       video.play().catch(() => {});
     });
     card.addEventListener('mouseleave', () => {
+      if (card.classList.contains('video-active')) return;
       video.pause();
       video.currentTime = 0;
+    });
+    card.addEventListener('click', (event) => {
+      if (event.target === soundToggle) return;
+      playWithSound();
+    });
+    soundToggle.addEventListener('click', (event) => {
+      event.stopPropagation();
+      if (!card.classList.contains('video-active')) {
+        playWithSound();
+        return;
+      }
+      video.muted = !video.muted;
+      soundToggle.textContent = video.muted ? 'Zvuk off' : 'Zvuk on';
+      soundToggle.setAttribute('aria-label', video.muted ? 'Zapnout zvuk' : 'Vypnout zvuk');
     });
   });
 })();
