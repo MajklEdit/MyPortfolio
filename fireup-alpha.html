@@ -13,14 +13,20 @@
   <style>
     .alpha-nav .nav-links a.active { color: #fff; }
     .alpha-hero { overflow: hidden; }
-    .alpha-hero .hero-eyebrow { margin-bottom: 1.6rem; }
-    .alpha-hero .hero-line { font-size: clamp(3.1rem, 11vw, 8rem); }
-    .alpha-hero .hero-sub-line { font-size: clamp(.95rem, 3vw, 2rem); letter-spacing: .16em; color: var(--text-dim); }
+    .alpha-logo { display: block; width: min(72vw, 360px); margin: 0 auto 2rem; border-radius: 24px; box-shadow: 0 24px 60px rgba(0,0,0,.38); }
     .alpha-hero .hero-desc { max-width: 38rem; }
     .alpha-hero .hero-cta { margin-top: 2.3rem; }
     .alpha-note { margin-top: 1.7rem; color: var(--text-dim); font-size: .8rem; letter-spacing: .04em; }
     @media (max-width: 960px) {
       .alpha-nav .alpha-nav-back { display: inline-flex; font-size: .68rem; padding: .52rem .85rem; }
+    }
+    @media (max-width: 768px) {
+      .alpha-hero { padding-top: 7rem; padding-bottom: 5rem; }
+      .alpha-logo { width: min(76vw, 300px); margin-bottom: 1.5rem; border-radius: 20px; }
+      .alpha-hero .hero-desc { margin-top: 1.5rem; max-width: 33rem; }
+      .alpha-hero .hero-cta { width: min(100%, 340px); flex-direction: column; gap: .7rem; }
+      .alpha-hero .hero-cta .btn { width: 100%; }
+      .alpha-note { margin-top: 1.35rem; font-size: .68rem; }
     }
     @media (max-width: 480px) {
       .alpha-nav { left: 10px; right: 10px; }
@@ -30,6 +36,8 @@
   </style>
 </head>
 <body>
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
   <div class="bg-fx" aria-hidden="true">
     <video class="bg-video" autoplay muted loop playsinline preload="auto"><source src="assets/bg-video.mp4" type="video/mp4" /></video>
     <div class="bg-video-overlay"></div>
@@ -44,18 +52,32 @@
   </header>
   <main>
     <section class="hero alpha-hero">
-      <p class="hero-eyebrow"><span class="pulse-dot"></span> FireUp · Alpha Testing</p>
-      <h1 class="hero-title">
-        <span class="hero-line"><span class="hero-word">FIREUP</span></span>
-        <span class="hero-line hero-sub-line">ALPHA TESTING</span>
-      </h1>
+      <img class="alpha-logo" src="assets/fireup-logo.png" alt="FireUp" />
       <p class="hero-desc">Aplikace pro návyky, úkoly a dlouhodobý progres. Pomáhá dát tvým ambicím směr a budovat disciplínu každý den.</p>
       <div class="hero-cta">
         <a class="btn btn-primary" href="https://drive.google.com/file/d/1XCFKYwgIGp7cl-cR1j8GHdlt7uGXHxpn/view?usp=sharing" target="_blank" rel="noreferrer">Stáhnout Alpha APK</a>
         <a class="btn btn-ghost" href="https://discord.gg/AG5q3e22E" target="_blank" rel="noreferrer">Discord &amp; feedback</a>
       </div>
-      <p class="alpha-note">OMEZENÝ ALPHA PŘÍSTUP · MAX. 20 TESTERŮ</p>
     </section>
   </main>
+  <script>
+    (() => {
+      if (!window.matchMedia('(hover: hover)').matches) return;
+      const ring = document.getElementById('cursorRing');
+      let mouseX = -100, mouseY = -100, ringX = -100, ringY = -100;
+      window.addEventListener('mousemove', event => { mouseX = event.clientX; mouseY = event.clientY; }, { passive: true });
+      const render = () => {
+        ringX += (mouseX - ringX) * .32;
+        ringY += (mouseY - ringY) * .32;
+        ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(render);
+      };
+      document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('mouseenter', () => ring.classList.add('hovering'));
+        link.addEventListener('mouseleave', () => ring.classList.remove('hovering'));
+      });
+      render();
+    })();
+  </script>
 </body>
 </html>
